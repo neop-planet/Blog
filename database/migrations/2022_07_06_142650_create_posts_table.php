@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('author_id');
             $table->string('author_type');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

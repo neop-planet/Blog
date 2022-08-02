@@ -14,7 +14,7 @@
                     </div>
                     <div class="ms-auto my-auto mt-lg-0 mt-4">
                         <div class="ms-auto my-auto">
-                            @can('add brand')
+                            @can('add post')
                             <a href="{{ route('admin.posts.create') }}" class="btn  btn-primary btn-sm mb-0"
                                 target="_blank">+&nbsp; @lang('main.new_post') </a>
                             @endcan
@@ -23,7 +23,7 @@
                 </div>
                 <div class="card-body px-0 pb-0">
                     <div class="table-responsive">
-                        <table class="table table-flush" id="products-list">
+                        <table class="table table-flush" id="posts-list">
                             <thead class="thead-light">
                                 <tr>
                                     <th>#</th>
@@ -38,81 +38,65 @@
                                     </th>
                                 </tr>
                             </thead>
-                            {{-- <tbody>
-                                @forelse($brands as $brand)
+                            <tbody>
+                                @forelse($posts as $post)
                                 <tr>
                                     <td>
                                         {{ $loop->iteration }}
                                     </td>
                                     <td>
                                         <div class="d-flex">
-                                            <h6 class="ms-3 my-auto">{{ $brand->name }}</h6>
+                                            <h6 class="ms-3 my-auto">{{ $post->title }}</h6>
                                         </div>
                                     </td>
                                     <td>
-                                        <img class="w-10 ms-3" src="{{ $brand->img }}" alt="brand_image" />
+                                        <img class="w-10 ms-3" src="{{ $post->img }}" alt="post_image" />
                                     </td>
                                     <td class="text-sm">
-                                        @can('edit brand')
-                                        <a href="{{ route('admin.brands.edit', $brand->id) }}" class="mx-3"
+                                        @can('edit post')
+                                        <a href="{{ route('admin.posts.edit', $post->id) }}" class="mx-3"
                                             data-bs-toggle="tooltip" data-bs-original-title="Edit product">
                                             <i class="fas fa-user-edit text-secondary"></i>
                                         </a>
                                         @endcan
-                                        @can('delete brand')
+                                        @can('delete post')
                                         <a href="javascript:;" data-bs-toggle="modal"
-                                            data-bs-target="#modal-delete_{{ $brand->id }}">
+                                            data-bs-target="#modal-delete_{{ $post->id }}">
                                             <i class="fas fa-trash text-secondary"></i>
                                         </a>
                                         @include('dashboard.components.delete-modal', [
-                                        'action' => route('admin.brands.destroy', $brand->id),
-                                        'id' => $brand->id,
+                                        'action' => route('admin.posts.destroy', $post->id),
+                                        'id' => $post->id,
                                         ])
                                         @endcan
                                     </td>
                                 </tr>
                                 @empty
                                 @endforelse
-                            </tbody> --}}
-                            <tfoot>
-                                <tr>
-                                    <th>@lang('main.name')</th>
-                                    <th>@lang('main.action')</th>
-                                </tr>
-                            </tfoot>
+                            </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="card-footer">
+                    {{ $posts->links() }}
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    @endsection
 
-    @push('script')
-    <script src="{{ asset('dashboard/js/plugins/datatables.js') }}"></script>
-    <script>
-        if (document.getElementById('products-list')) {
-                const dataTableSearch = new simpleDatatables.DataTable("#products-list", {
-                    searchable: true,
+@endsection
+
+@push('script')
+<script src="{{ asset('dashboard/js/plugins/datatables.js') }}"></script>
+<script>
+    if (document.getElementById('posts-list')) {
+                const dataTableSearch = new simpleDatatables.DataTable("#posts-list", {
+                    searchable: false,
                     fixedHeight: false,
-                    perPage: 7
-                });
-                document.querySelectorAll(".export").forEach(function(el) {
-                    el.addEventListener("click", function(e) {
-                        var type = el.dataset.type;
-                        var data = {
-                            type: type,
-                            filename: "soft-ui-" + type,
-                        };
-
-                        if (type === "csv") {
-                            data.columnDelimiter = "|";
-                        }
-
-                        dataTableSearch.export(data);
-                    });
+                    paging: false
                 });
             };
-    </script>
-    @endpush
+</script>
+@endpush

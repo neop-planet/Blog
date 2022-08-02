@@ -5,7 +5,7 @@ namespace Neop\Blog\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Neop\Blog\Database\Factories\PostFactory;
+use Neop\Blog\Factories\PostFactory;
 
 class Post extends Model
 {

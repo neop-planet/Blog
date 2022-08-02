@@ -2,6 +2,7 @@
 
 namespace Neop\Blog\Factories;
 
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Neop\Blog\Models\Post;
 
@@ -14,8 +15,9 @@ class PostFactory extends Factory
       return [
          'title' => $this->faker->unique()->word(),
          'slug' => $this->faker->unique()->slug(),
-         'content' => [],
-
+         'content' => \json_encode([]),
+         'author_id' => Admin::first(),
+         'author_type' => Admin::class
       ];
    }
 }

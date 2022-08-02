@@ -1,1 +1,5 @@
-# Blog package for laravel by @neop
+# Blog package for laravel by Neop
+
+## Installation
+
+`composer require q-neop/blog`

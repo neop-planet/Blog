@@ -4,28 +4,31 @@ namespace Neop\Blog\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Neop\Blog\Models\Post;
 
 class BlogController extends Controller
 {
    /**
-    * Display a listing of the resource.
+    * Display a listing of posts.
     *
-    * @return \Illuminate\Http\Response
+    * @return \Illuminate\Contracts\View\View
     */
    public function index()
    {
-      return view('admin-blog::index');
+      $posts = Post::latest()->paginate(15);
+
+      return view('admin-blog::index', get_defined_vars());
    }
 
    /**
     * Show the form for creating a new resource.
     *
-    * @return \Illuminate\Http\Response
+    * @return \Illuminate\Contracts\View\View
+
     */
    public function create()
    {
-      //
+      return view('admin-blog::create');
    }
 
    /**
