@@ -9,11 +9,21 @@ class ComposerStaticInitd0f70cfe6da832625b562992c77b87b7
     public static $prefixLengthsPsr4 = array (
         'N' => 
         array (
+            'Neop\\Blog\\Seeders\\' => 18,
+            'Neop\\Blog\\Factories\\' => 20,
             'Neop\\Blog\\' => 10,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Neop\\Blog\\Seeders\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/database/seeders',
+        ),
+        'Neop\\Blog\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/database/factories',
+        ),
         'Neop\\Blog\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',

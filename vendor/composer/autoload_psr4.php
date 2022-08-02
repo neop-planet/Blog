@@ -6,5 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Neop\\Blog\\Seeders\\' => array($baseDir . '/database/seeders'),
+    'Neop\\Blog\\Factories\\' => array($baseDir . '/database/factories'),
     'Neop\\Blog\\' => array($baseDir . '/src'),
 );

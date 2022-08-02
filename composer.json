@@ -4,7 +4,9 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Neop\\Blog\\": "src/"
+      "Neop\\Blog\\": "src/",
+      "Neop\\Blog\\Factories\\": "database/factories",
+      "Neop\\Blog\\Seeders\\": "database/seeders"
     }
   },
   "autoload-dev": {

@@ -1,1 +1,1 @@
-# Blog
+# Blog package for laravel by @neop
