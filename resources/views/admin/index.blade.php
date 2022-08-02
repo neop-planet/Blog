@@ -21,6 +21,7 @@
                         </div>
                     </div>
                 </div>
+                @dd()
                 <div class="card-body px-0 pb-0">
                     <div class="table-responsive">
                         <table class="table table-flush" id="products-list">
