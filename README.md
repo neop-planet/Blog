@@ -2,4 +2,6 @@
 
 ## Installation
 
-`composer require q-neop/blog`
+```bash
+composer require q-neop/blog
+```
