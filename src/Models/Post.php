@@ -14,18 +14,6 @@ class Post extends Model
    use HasFactory, SoftDeletes;
    protected $guarded = [];
 
-   /**
-    * Interact with the user's first name.
-    *
-    * @return \Illuminate\Database\Eloquent\Casts\Attribute
-    */
-   protected function slug(): Attribute
-   {
-      return Attribute::make(
-         set: fn ($value) => strtolower($value),
-      );
-   }
-
    protected static function newFactory()
    {
       return PostFactory::new();
