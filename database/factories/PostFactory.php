@@ -15,7 +15,7 @@ class PostFactory extends Factory
       return [
          'title' => $this->faker->unique()->word(),
          'slug' => $this->faker->unique()->slug(),
-         'content' => \json_encode([]),
+         'content' => $this->faker->paragraph(),
          'author_id' => Admin::first(),
          'author_type' => Admin::class
       ];

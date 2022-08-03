@@ -3,7 +3,8 @@
 namespace Neop\Blog\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Neop\Blog\Http\Requests\Admin\StorePostRequest;
+use Neop\Blog\Http\Requests\Admin\UpdatePostRequest;
 use Neop\Blog\Models\Post;
 
 class BlogController extends Controller
@@ -17,18 +18,17 @@ class BlogController extends Controller
    {
       $posts = Post::latest()->paginate(15);
 
-      return view('admin-blog::index', get_defined_vars());
+      return view('neop.blog.admin.index', get_defined_vars());
    }
 
    /**
     * Show the form for creating a new resource.
     *
     * @return \Illuminate\Contracts\View\View
-
     */
    public function create()
    {
-      return view('admin-blog::create');
+      return view('neop.blog.admin.create');
    }
 
    /**
@@ -37,53 +37,51 @@ class BlogController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-   public function store(Request $request)
+   public function store(StorePostRequest $request)
    {
-      //
-   }
+      Post::create($request->validated());
 
-   /**
-    * Display the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-   public function show($id)
-   {
-      //
+      toast(trans('main.post_created'), 'success');
+      return redirect()->route('admin.posts.index');
    }
 
    /**
     * Show the form for editing the specified resource.
     *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
+    * @param  Post $post
+    * @return \Illuminate\Contracts\View\View
     */
-   public function edit($id)
+   public function edit(Post $post)
    {
-      //
+      return view('neop.blog.admin.edit', get_defined_vars());
    }
 
    /**
     * Update the specified resource in storage.
     *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  int  $id
+    * @param  \Neop\Blog\Http\Requests\Admin\UpdatePostRequest $request
+    * @param  Post $post
     * @return \Illuminate\Http\Response
     */
-   public function update(Request $request, $id)
+   public function update(UpdatePostRequest $request, Post $post)
    {
-      //
+      $post->update($request->validated());
+
+      toast(trans('main.post_created'), 'success');
+      return redirect()->route('admin.posts.index');
    }
 
    /**
     * Remove the specified resource from storage.
     *
-    * @param  int  $id
+    * @param  Post $post
     * @return \Illuminate\Http\Response
     */
-   public function destroy($id)
+   public function destroy(Post $post)
    {
-      //
+      $post->delete();
+
+      toast(trans('main.post_deleted'), 'success');
+      return redirect()->route('admin.posts.index');
    }
 }

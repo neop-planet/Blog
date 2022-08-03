@@ -11,14 +11,11 @@ class BlogServiceProvider extends ServiceProvider
       $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
       $this->loadRoutesFrom(__DIR__ . '/../../routes/admin.php');
 
-      $this->loadViewsFrom(__DIR__ . '/../../resources/views/website', 'website-blog');
-      $this->loadViewsFrom(__DIR__ . '/../../resources/views/admin', 'admin-blog');
-
       $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
       $this->publishes([
-         __DIR__ . '/../../resources/views/' => resource_path('views/neop'),
-      ], 'neop-blog-views');
+         __DIR__ . '/../../resources/views/' => resource_path('views/neop/blog'),
+      ], 'laravel-assets');
 
 
       $this->publishes([
