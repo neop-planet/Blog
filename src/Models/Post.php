@@ -22,4 +22,8 @@ class Post extends Model
    {
       return $this->morphTo();
    }
+   public function blogTags()
+   {
+      return $this->belongsToMany(BlogTag::class);
+   }
 }

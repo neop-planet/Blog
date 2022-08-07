@@ -2,11 +2,10 @@
 
 namespace Neop\Blog\Factories;
 
-use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Neop\Blog\Models\Post;
 
-class PostFactory extends Factory
+class BlogTagsFactory extends Factory
 {
    protected $model = Post::class;
 
@@ -14,10 +13,6 @@ class PostFactory extends Factory
    {
       return [
          'title' => $this->faker->unique()->word(),
-         'slug' => $this->faker->unique()->slug(),
-         'content' => $this->faker->paragraph(),
-         'author_id' => Admin::get()->random()->id,
-         'author_type' => Admin::class
       ];
    }
 }
