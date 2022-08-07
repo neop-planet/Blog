@@ -25,8 +25,9 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string',
-            'content' => 'required',
+            'title.*' => 'required|string',
+            'image' => 'nullable|mimes:jpeg,jpg,png|max:5000',
+            'content.*' => 'nullable|string',
         ];
     }
 
@@ -36,7 +37,10 @@ class StorePostRequest extends FormRequest
     public function validated($key = null, $default = null)
     {
         return array_merge([
-            'slug' => Str::slug($this->title),
+            'slug' => \json_encode([
+                'en' => Str::slug($this->title['en']),
+                'ar' => arabicSlug($this->title['ar'])
+            ]),
             'author_id' => auth()->guard('admin')->id(),
             'author_type' => get_class(auth()->guard('admin')->user())
         ], parent::validated());

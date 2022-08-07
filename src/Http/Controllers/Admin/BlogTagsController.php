@@ -3,6 +3,7 @@
 namespace Neop\Blog\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Neop\Blog\Http\Requests\Admin\PostTagRequest;
 use Neop\Blog\Models\BlogTag;
 
 class BlogTagsController extends Controller
@@ -16,7 +17,8 @@ class BlogTagsController extends Controller
    {
       $tags = BlogTag::latest()->paginate(15);
 
-      return view('neop.blog-tags.admin.index', get_defined_vars());
+      return view('neop-blog::blog-tags.admin.index', get_defined_vars());
+      // return view('neop.blog-tags.admin.index', get_defined_vars());
    }
    /**
     * Show the form for creating a new resource.
@@ -25,7 +27,8 @@ class BlogTagsController extends Controller
     */
    public function create()
    {
-      return view('neop.blog-tags.admin.create');
+      return view('neop-blog::blog-tags.admin.create');
+      // return view('neop.blog-tags.admin.create');
    }
 
    /**
@@ -34,51 +37,53 @@ class BlogTagsController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-   public function store(StorePostRequest $request)
+   public function store(PostTagRequest $request)
    {
-      Post::create($request->validated());
+      BlogTag::create($request->validated());
 
-      toast(trans('main.post_created'), 'success');
-      return redirect()->route('admin.posts.index');
+      toast(trans('main.tag_created'), 'success');
+      return redirect()->route('admin.posts.tags.index');
    }
 
    /**
     * Show the form for editing the specified resource.
     *
-    * @param  Post $post
+    * @param  BlogTag $tag
     * @return \Illuminate\Contracts\View\View
     */
-   public function edit(Post $post)
+   public function edit(BlogTag $tag)
    {
-      return view('neop.blog.admin.edit', get_defined_vars());
+      return view('neop-blog::blog-tags.admin.edit', get_defined_vars());
+
+      // return view('neop.blog.admin.edit', get_defined_vars());
    }
 
    /**
     * Update the specified resource in storage.
     *
-    * @param  \Neop\Blog\Http\Requests\Admin\UpdatePostRequest $request
-    * @param  Post $post
+    * @param  \Neop\Blog\Http\Requests\Admin\PostTagRequest $request
+    * @param  BlogTag $tag
     * @return \Illuminate\Http\Response
     */
-   public function update(UpdatePostRequest $request, Post $post)
+   public function update(PostTagRequest $request, BlogTag $tag)
    {
-      $post->update($request->validated());
+      $tag->update($request->validated());
 
-      toast(trans('main.post_created'), 'success');
-      return redirect()->route('admin.posts.index');
+      toast(trans('main.tag_updated'), 'success');
+      return redirect()->route('admin.posts.tags.index');
    }
 
    /**
     * Remove the specified resource from storage.
     *
-    * @param  Post $post
+    * @param  BlogTag $tag
     * @return \Illuminate\Http\Response
     */
-   public function destroy(Post $post)
+   public function destroy(BlogTag $tag)
    {
-      $post->delete();
+      $tag->delete();
 
-      toast(trans('main.post_deleted'), 'success');
-      return redirect()->route('admin.posts.index');
+      toast(trans('main.tag_deleted'), 'success');
+      return redirect()->route('admin.posts.tags.index');
    }
 }

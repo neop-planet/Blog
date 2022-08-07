@@ -3,11 +3,11 @@
 namespace Neop\Blog\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Neop\Blog\Models\Post;
+use Neop\Blog\Models\BlogTag;
 
 class BlogTagsFactory extends Factory
 {
-   protected $model = Post::class;
+   protected $model = BlogTag::class;
 
    public function definition()
    {

@@ -18,7 +18,8 @@ class BlogController extends Controller
    {
       $posts = Post::latest()->paginate(15);
 
-      return view('neop.blog.admin.index', get_defined_vars());
+      return view('neop-blog::blog.admin.index', get_defined_vars());
+      // return view('neop.blog.admin.index', get_defined_vars());
    }
 
    /**
@@ -28,7 +29,8 @@ class BlogController extends Controller
     */
    public function create()
    {
-      return view('neop.blog.admin.create');
+      return view('neop-blog::blog.admin.create');
+      // return view('neop.blog.admin.create');
    }
 
    /**
@@ -39,6 +41,7 @@ class BlogController extends Controller
     */
    public function store(StorePostRequest $request)
    {
+
       Post::create($request->validated());
 
       toast(trans('main.post_created'), 'success');
@@ -53,7 +56,8 @@ class BlogController extends Controller
     */
    public function edit(Post $post)
    {
-      return view('neop.blog.admin.edit', get_defined_vars());
+      return view('neop-blog::blog.admin.edit', get_defined_vars());
+      // return view('neop.blog.admin.edit', get_defined_vars());
    }
 
    /**
@@ -67,7 +71,7 @@ class BlogController extends Controller
    {
       $post->update($request->validated());
 
-      toast(trans('main.post_created'), 'success');
+      toast(trans('main.post_updated'), 'success');
       return redirect()->route('admin.posts.index');
    }
 

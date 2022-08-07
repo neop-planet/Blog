@@ -5,7 +5,7 @@ namespace Neop\Blog\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 
-class UpdatePostRequest extends FormRequest
+class PostTagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,21 +26,6 @@ class UpdatePostRequest extends FormRequest
     {
         return [
             'title.*' => 'required|string',
-            'image' => 'nullable|mimes:jpeg,jpg,png|max:5000',
-            'content.*' => 'nullable|string',
         ];
-    }
-
-    /**
-     * @return array
-     */
-    public function validated($key = null, $default = null)
-    {
-        return array_merge([
-            'slug' => \json_encode([
-                'en' => Str::slug($this->title['en']),
-                'ar' => arabicSlug($this->title['ar'])
-            ]),
-        ], parent::validated());
     }
 }

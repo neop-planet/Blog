@@ -53,7 +53,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <img class="w-10 ms-3" src="{{ $post->img }}" alt="post_image" />
+                                        <img class="w-10 ms-3" src="{{ $post->img }}" alt="{{ $post->title }}" />
                                     </td>
                                     <td>
                                         {{ $post->author->name }}
