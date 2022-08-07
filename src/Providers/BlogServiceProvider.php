@@ -16,8 +16,8 @@ class BlogServiceProvider extends ServiceProvider
       $this->publishes([
          __DIR__ . '/../../resources/views/' => resource_path('views/neop/'),
          __DIR__ . '/../../database/migrations/create_posts_table.php' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_posts_table.php'),
-         __DIR__ . '/../../database/migrations/create_blog_tags_table.php' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_posts_table.php'),
-         __DIR__ . '/../../database/migrations/create_post_tags_table.php' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_posts_table.php'),
+         __DIR__ . '/../../database/migrations/create_blog_tags_table.php' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_blog_tags_table.php'),
+         __DIR__ . '/../../database/migrations/create_blog_tag_post_table.php' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_blog_tag_post_table.php'),
       ], 'laravel-assets');
 
 
