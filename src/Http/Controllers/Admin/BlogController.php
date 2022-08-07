@@ -5,6 +5,7 @@ namespace Neop\Blog\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Neop\Blog\Http\Requests\Admin\StorePostRequest;
 use Neop\Blog\Http\Requests\Admin\UpdatePostRequest;
+use Neop\Blog\Models\BlogTag;
 use Neop\Blog\Models\Post;
 
 class BlogController extends Controller
@@ -29,7 +30,8 @@ class BlogController extends Controller
     */
    public function create()
    {
-      return view('neop-blog::blog.admin.create');
+      $tags = BlogTag::select('id', 'title')->latest()->get();
+      return view('neop-blog::blog.admin.create', get_defined_vars());
       // return view('neop.blog.admin.create');
    }
 
@@ -41,8 +43,9 @@ class BlogController extends Controller
     */
    public function store(StorePostRequest $request)
    {
+      $post = Post::create($request->validated());
 
-      Post::create($request->validated());
+      $post->blogTags()->sync($request->tags);
 
       toast(trans('main.post_created'), 'success');
       return redirect()->route('admin.posts.index');
@@ -56,6 +59,8 @@ class BlogController extends Controller
     */
    public function edit(Post $post)
    {
+      $tags = BlogTag::select('id', 'title')->latest()->get();
+
       return view('neop-blog::blog.admin.edit', get_defined_vars());
       // return view('neop.blog.admin.edit', get_defined_vars());
    }
@@ -71,6 +76,8 @@ class BlogController extends Controller
    {
       $post->update($request->validated());
 
+      $post->blogTags()->sync($request->tags);
+
       toast(trans('main.post_updated'), 'success');
       return redirect()->route('admin.posts.index');
    }
@@ -83,6 +90,8 @@ class BlogController extends Controller
     */
    public function destroy(Post $post)
    {
+      $post->blogTags()->detach();
+
       $post->delete();
 
       toast(trans('main.post_deleted'), 'success');

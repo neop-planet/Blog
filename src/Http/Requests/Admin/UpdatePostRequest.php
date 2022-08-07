@@ -28,6 +28,7 @@ class UpdatePostRequest extends FormRequest
             'title.*' => 'required|string',
             'image' => 'nullable|mimes:jpeg,jpg,png|max:5000',
             'content.*' => 'nullable|string',
+            'tags' => 'exists:blog_tags,id',
         ];
     }
 
@@ -36,6 +37,8 @@ class UpdatePostRequest extends FormRequest
      */
     public function validated($key = null, $default = null)
     {
+        unset(parent::validated()['tags']);
+
         return array_merge([
             'slug' => \json_encode([
                 'en' => Str::slug($this->title['en']),

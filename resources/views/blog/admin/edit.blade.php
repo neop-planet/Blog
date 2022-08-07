@@ -83,6 +83,24 @@
                             style="overflow:hidden">{{old('content.ar' ,$post->getTranslation('content','ar'))}}</textarea>
                     </div>
                 </div>
+                <div class="row mt-4">
+                    <div class="col-12 col-sm-12 mt-3 mt-sm-0">
+                        <label for="choices-tags">@lang('main.tags')</label>
+                        <select class="form-control" name="tags[]" id="choices-tags" multiple>
+                            @forelse ($tags as $tag)
+                            <option value="{{ $tag->id }}" @if (in_array($tag->id,
+                                old('tags')??$post->blogTags->pluck('id')->toArray())) selected @endif>{{ $tag->title
+                                }}
+                            </option>
+                            @empty
+                            <option value="">@lang('main.no_tags')</option>
+                            @endforelse
+                        </select>
+                        @error('tags')
+                        <div class="text text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -96,6 +114,14 @@
 <link rel="stylesheet" href="{{asset('dashboard/js/plugins/imageUpload/upload.css')}}" type="text/css">
 @endpush
 @push('script')
+<script>
+    if (document.getElementById('choices-tags')) {
+        var tags = document.getElementById('choices-tags');
+        const examples = new Choices(tags, {
+            removeItemButton: true
+        });
+    }
+</script>
 <script src="{{asset('dashboard/js/plugins/tinymce/tinymce.min.js')}}"></script>
 <script src="{{asset('dashboard/js/plugins/tinymce/tinymce-init.js')}}"></script>
 <script>
