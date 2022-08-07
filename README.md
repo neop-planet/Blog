@@ -6,9 +6,8 @@
 composer require q-neop/blog
 ```
 
-add this to config app file.
+add this to config app file. //config/app.php
 
 ```bash
-//config/app.php
  Neop\Blog\Providers\BlogServiceProvider::class
 ```
