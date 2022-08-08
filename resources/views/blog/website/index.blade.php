@@ -1,108 +1,57 @@
-@extends('dashboard.layout.app')
-@section('title', trans('main.Tags'))
-@section('main_folder', __('main.dashboard'))
-@section('sub_folder', __('main.Tags'))
+@extends('website.layout.app')
+@section('title', __('main.posts'))
 @section('content')
-<div class="row">
-   <div class="col-12">
-      <div class="card">
-         <!-- Card header -->
-         <div class="card-header pb-0">
-            <div class="d-lg-flex">
-               <div>
-                  <h5 class="mb-0">@lang('main.Tags')</h5>
-               </div>
-               <div class="ms-auto my-auto mt-lg-0 mt-4">
-                  <div class="ms-auto my-auto">
-                     @can('add post')
-                     <a href="{{ route('admin.posts.create') }}" class="btn  btn-primary btn-sm mb-0"
-                        target="_blank">+&nbsp; @lang('main.new_post') </a>
-                     @endcan
-                  </div>
-               </div>
-            </div>
-            <div class="card-body px-0 pb-0">
-               <div class="table-responsive">
-                  <table class="table table-flush" id="posts-list">
-                     <thead class="thead-light">
-                        <tr>
-                           <th>#</th>
-                           <th>
-                              @lang('main.name')
-                           </th>
-                           <th>
-                              @lang('main.image')
-                           </th>
-                           <th>
-                              @lang('main.author')
-                           </th>
-                           <th>
-                              @lang('main.action')
-                           </th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        @forelse($posts as $post)
-                        <tr>
-                           <td>
-                              {{ $loop->iteration }}
-                           </td>
-                           <td>
-                              <div class="d-flex">
-                                 <h6 class="ms-3 my-auto">{{ $post->title }}</h6>
-                              </div>
-                           </td>
-                           <td>
-                              <img class="w-10 ms-3" src="{{ $post->img }}" alt="post_image" />
-                           </td>
-                           <td>
-                              {{ $post->author->name }}
-                           </td>
-                           <td class="text-sm">
-                              @can('edit post')
-                              <a href="{{ route('admin.posts.edit', $post->id) }}" class="mx-3" data-bs-toggle="tooltip"
-                                 data-bs-original-title="Edit product">
-                                 <i class="fas fa-user-edit text-secondary"></i>
-                              </a>
-                              @endcan
-                              @can('delete post')
-                              <a href="javascript:;" data-bs-toggle="modal"
-                                 data-bs-target="#modal-delete_{{ $post->id }}">
-                                 <i class="fas fa-trash text-secondary"></i>
-                              </a>
-                              @include('dashboard.components.delete-modal', [
-                              'action' => route('admin.posts.destroy', $post->id),
-                              'id' => $post->id,
-                              ])
-                              @endcan
-                           </td>
-                        </tr>
-                        @empty
-                        @endforelse
-                     </tbody>
-                  </table>
+<x-page-header :title="__('main.posts')" url="{{ route('store.index') }}" img_class="bg-store" />
+
+<div class="article-page">
+   <div class="container">
+      <div class="row">
+         @if (count($posts))
+         <div class="col-12">
+            @foreach ($posts as $post)
+            <div class="item-article">
+               <span dir="rtl">بواسطة {{ $post->author->name }} /</span>
+               <span>{{ $post->created_at->format('Y F d') }}</span>
+               <h4><a href="article-details.html">{{ $post->title }}</a></h4>
+               <p>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث
+                  يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها
+                  التطبيق، إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى زيادة عدد الفقرات كما تريد،
+                  النص لن يبدو مقسما ولا يحوي أخطاء لغوية، مولد</p>
+               <div class="img-article">
+                  <a href="article-details.html"> <img src="assets/images/article/article-details-1.png" alt="img"></a>
                </div>
             </div>
-            <div class="card-footer">
-               {{ $posts->links() }}
+            @endforeach
+            {{-- <div class="item-article">
+               <span>بواسطة أدمن / 13فبراير 2021</span>
+               <h4><a href="article-details.html">الملوحي جريدة الرياض</a></h4>
+               <p>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث
+                  يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها
+                  التطبيق، إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى زيادة عدد الفقرات كما تريد،
+                  النص لن يبدو مقسما ولا يحوي أخطاء لغوية، مولد</p>
+               <div class="img-article">
+                  <a href="article-details.html"> <img src="assets/images/article/article-details2.png" alt="img"></a>
+               </div>
             </div>
+            <div class="item-article">
+               <span>بواسطة أدمن / 13فبراير 2021</span>
+               <h4><a href="article-details.html">الملوحي جريدة الرياض</a></h4>
+               <p>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث
+                  يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها
+                  التطبيق، إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى زيادة عدد الفقرات كما تريد،
+                  النص لن يبدو مقسما ولا يحوي أخطاء لغوية، مولد</p>
+               <div class="img-article">
+                  <a href="article-details.html"> <img src="assets/images/article/artcle-deatls3.png" alt="img"></a>
+               </div>
+            </div> --}}
          </div>
+         {{ $posts->links() }}
+         @else
+         <div class="alert alert-info text-center">@lang('web.no_aritcles')</div>
+         @endif
       </div>
+      <img class="icon-article" src="{{ asset('website/images/article/article-icon.svg') }}">
+      <img class="icon-article-left" src="{{ asset('website/images/article/article-icon.svg') }}">
    </div>
 </div>
-
-
 @endsection
-
-@push('script')
-<script src="{{ asset('dashboard/js/plugins/datatables.js') }}"></script>
-<script>
-   if (document.getElementById('posts-list')) {
-                const dataTableSearch = new simpleDatatables.DataTable("#posts-list", {
-                    searchable: false,
-                    fixedHeight: false,
-                    paging: false
-                });
-            };
-</script>
-@endpush

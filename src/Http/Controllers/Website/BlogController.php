@@ -4,18 +4,20 @@ namespace Neop\Blog\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Neop\Blog\Models\Post;
 
 class BlogController extends Controller
 {
    /**
-    * Display a listing of the resource.
+    * Display a listing of posts.
     *
-    * @return \Illuminate\Http\Response
+    * @return \Illuminate\Contracts\View\View
     */
    public function index()
    {
-      return view('website-blog::index');
+      $posts = Post::latest()->paginate(8);
+
+      return view('neop-blog::blog.website.index', get_defined_vars());
    }
 
    /**
