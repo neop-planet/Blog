@@ -20,7 +20,11 @@
             </div>
             @endforeach
          </div>
-         {{ $posts->links() }}
+         <div class="row">
+            <div class="col-12">
+               {{ $posts->links() }}
+            </div>
+         </div>
          @else
          <div class="alert alert-info text-center">@lang('web.no_aritcles')</div>
          @endif
