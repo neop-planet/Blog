@@ -1,6 +1,6 @@
 <?php
 
-namespace Neop\Blog\Seeders;
+namespace Neop\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Neop\Blog\Models\Post;

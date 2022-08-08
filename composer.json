@@ -5,8 +5,8 @@
   "autoload": {
     "psr-4": {
       "Neop\\Blog\\": "src/",
-      "Neop\\Blog\\Factories\\": "database/factories",
-      "Neop\\Blog\\Seeders\\": "database/seeders"
+      "Neop\\Database\\Factories\\": "database/factories",
+      "Neop\\Database\\Seeders\\": "database/seeders"
     }
   },
   "autoload-dev": {
