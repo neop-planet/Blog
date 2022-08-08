@@ -4,7 +4,7 @@ namespace Neop\Blog\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Neop\Blog\Factories\BlogTagsFactory;
+use Neop\Database\Factories\BlogTagsFactory;
 use Spatie\Translatable\HasTranslations;
 
 class BlogTag extends Model

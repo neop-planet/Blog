@@ -5,7 +5,7 @@ namespace Neop\Blog\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Neop\Blog\Factories\PostFactory;
+use Neop\Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use INeop\FileUpload\Facades\FileUpload;
 use Spatie\Translatable\HasTranslations;

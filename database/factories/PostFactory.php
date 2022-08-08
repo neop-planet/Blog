@@ -1,6 +1,6 @@
 <?php
 
-namespace Neop\Blog\Factories;
+namespace Neop\Database\Factories;
 
 use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\Factory;

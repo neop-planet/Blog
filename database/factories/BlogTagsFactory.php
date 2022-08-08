@@ -1,6 +1,6 @@
 <?php
 
-namespace Neop\Blog\Factories;
+namespace Neop\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Neop\Blog\Models\BlogTag;
