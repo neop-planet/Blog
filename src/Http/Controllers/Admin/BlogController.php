@@ -70,7 +70,7 @@ class BlogController extends Controller
     *
     * @param  \Neop\Blog\Http\Requests\Admin\UpdatePostRequest $request
     * @param  Post $post
-    * @return \Illuminate\Http\Response
+    * @return \Illuminate\Http\RedirectResponse
     */
    public function update(UpdatePostRequest $request, Post $post)
    {
@@ -79,7 +79,7 @@ class BlogController extends Controller
       $post->blogTags()->sync($request->tags);
 
       toast(trans('main.post_updated'), 'success');
-      return redirect()->route('admin.posts.index');
+      return back();
    }
 
    /**

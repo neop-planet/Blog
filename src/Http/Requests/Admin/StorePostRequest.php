@@ -40,10 +40,10 @@ class StorePostRequest extends FormRequest
         unset(parent::validated()['tags']);
 
         return array_merge([
-            'slug' => \json_encode([
+            'slug' => [
                 'en' => Str::slug($this->title['en']),
                 'ar' => arabicSlug($this->title['ar'])
-            ]),
+            ],
             'author_id' => auth()->guard('admin')->id(),
             'author_type' => get_class(auth()->guard('admin')->user())
         ], parent::validated());

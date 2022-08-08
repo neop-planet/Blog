@@ -40,10 +40,10 @@ class UpdatePostRequest extends FormRequest
         unset(parent::validated()['tags']);
 
         return array_merge([
-            'slug' => \json_encode([
+            'slug' => [
                 'en' => Str::slug($this->title['en']),
                 'ar' => arabicSlug($this->title['ar'])
-            ]),
+            ],
         ], parent::validated());
     }
 }

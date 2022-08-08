@@ -3,6 +3,7 @@
 namespace Neop\Blog\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Neop\Blog\Models\Post;
 
@@ -15,74 +16,28 @@ class BlogController extends Controller
     */
    public function index()
    {
-      $posts = Post::latest()->paginate(8);
+      $posts = Post::filter()->latest()->with('author')->paginate(5);
 
       return view('neop-blog::blog.website.index', get_defined_vars());
    }
 
-   /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-   public function create()
-   {
-      //
-   }
 
    /**
-    * Store a newly created resource in storage.
+    * Display the specified post.
     *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
+    * @param  Post $post
+    * @return \Illuminate\Contracts\View\View
     */
-   public function store(Request $request)
+   public function show($slug)
    {
-      //
-   }
+      $post = Post::slug($slug)->with('author', 'blogTags')->first();
 
-   /**
-    * Display the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-   public function show($id)
-   {
-      //
-   }
+      $otherPosts = Post::where('created_at', '>=', Carbon::now()->subdays(30))->with('author')->get()->except($post->id)->take(4);
 
-   /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-   public function edit($id)
-   {
-      //
-   }
+      if (!count($otherPosts)) {
+         $otherPosts = Post::latest()->with('author')->get()->except($post->id)->take(4);
+      }
 
-   /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-   public function update(Request $request, $id)
-   {
-      //
-   }
-
-   /**
-    * Remove the specified resource from storage.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-   public function destroy($id)
-   {
-      //
+      return view('neop-blog::blog.website.show', compact('post', 'otherPosts'));
    }
 }
