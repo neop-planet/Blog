@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->json('title');
-            $table->string('slug', 300)->unique();
+            $table->json('slug');
             $table->string('image')->nullable();
             $table->json('content');
             $table->unsignedBigInteger('author_id');
