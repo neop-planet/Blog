@@ -12,7 +12,7 @@
             <div class="item-article">
                <span dir="rtl">@lang('web.by') {{ $post->author->name }} /</span>
                <span>{{ $post->created_at->format('Y F d') }}</span>
-               <h4><a href="article-details.html">{{ $post->title }}</a></h4>
+               <h4><a href="{{ route('posts.show',$post->slug) }}">{{ $post->title }}</a></h4>
                <p>{{ $post->trimContent }}</p>
                <div class="img-article">
                   <a href="{{ route('posts.show',$post->slug) }}"> <img src="{{ $post->img }}" alt="img"></a>
