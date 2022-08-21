@@ -26,7 +26,7 @@
             </div>
          </div>
          @else
-         <div class="alert alert-info text-center">@lang('web.no_aritcles')</div>
+         <div class="alert alert-info text-center">@lang('web.no_articles')</div>
          @endif
       </div>
       <img class="icon-article" src="{{ asset('website/images/article/article-icon.svg') }}">
