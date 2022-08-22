@@ -1,7 +1,7 @@
 @extends('dashboard.layout.app')
-@section('title', trans('main.create_post'))
+@section('title', trans('main.new_post'))
 @section('main_folder', __('main.dashboard'))
-@section('sub_folder', __('main.create_post'))
+@section('sub_folder', __('main.new_post'))
 @section('content')
 
 <form method="post" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data">

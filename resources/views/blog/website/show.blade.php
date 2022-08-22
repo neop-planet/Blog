@@ -14,33 +14,11 @@
                </div>
                <div class="description">
                   <ul class="publish-in">
-                     <li> @lang('web.published_at') {{ $post->created_at->format('Y F d') }}</li>
-                     <li>@lang('web.by') {{ $post->author->name }}</li>
+                     {{-- <li> @lang('web.published_at') {{ $post->created_at->format('Y F d') }}</li>
+                     <li>@lang('web.by') {{ $post->author->name }}</li> --}}
                   </ul>
                   <h4>{{ $post->title }}</h4>
                   {!! $post->content !!}
-                  {{-- <div class="img-group">
-                     <div class="row">
-                        <div class="col-lg-8 col-xs-12">
-                           <div class="right-img h-100">
-                              <img src="assets/images/article/article-single1.png" alt="Article-details">
-                           </div>
-                        </div>
-                        <div class="col-lg-4 col-xs-12">
-                           <div class="left-img h-100">
-                              <img src="assets/images/article/article-single2.png" alt="Article-details">
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <p>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث
-                     يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها
-                     التطبيق، إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى زيادة عدد الفقرات كما تريد،
-                     النص لن يبدو مقسما ولا يحوي أخطاء لغوية، مولد...هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة،
-                     لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص
-                     الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق، إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح
-                     لك مولد النص العربى زيادة عدد الفقرات كما تريد، النص لن يبدو مقسما ولا يحوي أخطاء لغوية</p>
-                  --}}
                </div>
             </div>
          </div>
@@ -64,10 +42,10 @@
                         <li>
                            <p><a href="{{ route('posts.show',$opost->slug) }}">{{$opost->title}}</a>
                            </p>
-                           <ul class="publish-in">
+                           {{-- <ul class="publish-in">
                               <li> @lang('web.published_at') {{ $opost->created_at->format('Y F d') }}</li>
                               <li>@lang('web.by') {{ $opost->author->name }}</li>
-                           </ul>
+                           </ul> --}}
                         </li>
                      </ul>
                      @endforeach

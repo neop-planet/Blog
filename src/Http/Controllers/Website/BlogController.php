@@ -16,7 +16,7 @@ class BlogController extends Controller
     */
    public function index()
    {
-      $posts = Post::filter()->latest()->with('author')->paginate(5);
+      $posts = Post::filter()->latest()->paginate(5);
 
       return view('neop-blog::blog.website.index', get_defined_vars());
    }
@@ -30,12 +30,12 @@ class BlogController extends Controller
     */
    public function show($slug)
    {
-      $post = Post::slug($slug)->with('author', 'blogTags')->first();
+      $post = Post::slug($slug)->with('blogTags')->first();
 
-      $otherPosts = Post::where('created_at', '>=', Carbon::now()->subdays(30))->with('author')->get()->except($post->id)->take(4);
+      $otherPosts = Post::where('created_at', '>=', Carbon::now()->subdays(30))->get()->except($post->id)->take(4);
 
       if (!count($otherPosts)) {
-         $otherPosts = Post::latest()->with('author')->get()->except($post->id)->take(4);
+         $otherPosts = Post::latest()->get()->except($post->id)->take(4);
       }
 
       return view('neop-blog::blog.website.show', compact('post', 'otherPosts'));

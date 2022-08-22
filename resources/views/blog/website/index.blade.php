@@ -10,8 +10,8 @@
          <div class="col-xxl-9 col-lg-10 col-md-12 col-12">
             @foreach ($posts as $post)
             <div class="item-article">
-               <span dir="rtl">@lang('web.by') {{ $post->author->name }} /</span>
-               <span>{{ $post->created_at->format('Y F d') }}</span>
+               {{-- <span dir="rtl">@lang('web.by') {{ $post->author->name }} /</span>
+               <span>{{ $post->created_at->format('Y F d') }}</span> --}}
                <h4><a href="{{ route('posts.show',$post->slug) }}">{{ $post->title }}</a></h4>
                <p>{{ $post->trimContent }}</p>
                <div class="img-article">
