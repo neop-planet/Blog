@@ -5,9 +5,9 @@
 
 <div class="article-page">
    <div class="container">
-      <div class="row">
+      <div class="row justify-content-center">
          @if (count($posts))
-         <div class="col-12">
+         <div class="col-xxl-9 col-lg-10 col-md-12 col-12">
             @foreach ($posts as $post)
             <div class="item-article">
                <span dir="rtl">@lang('web.by') {{ $post->author->name }} /</span>
