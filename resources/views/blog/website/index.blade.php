@@ -22,7 +22,7 @@
          </div>
          <div class="row">
             <div class="col-12">
-               {{ $posts->links() }}
+               {{ $posts->links('website.pagination.index') }}
             </div>
          </div>
          @else
