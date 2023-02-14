@@ -1,7 +1,7 @@
 @extends('website.layout.app')
 @section('title', $post->title)
 @section('content')
-<x-page-header :title="__('main.posts')" url="{{ route('store.index') }}" img_class="bg-article" />
+<x-page-header :title="__('main.posts')" url="{{ route('posts.index') }}" img_class="bg-article" />
 
 <div class="article-page article-section-details">
    <div class="container">
